@@ -13,7 +13,6 @@ PRICES = {
 }
 # SQL can be like "SELECT ... FROM offers WHERE product_in in ... ORDER BY discount DESC"
 OFFERS = [
-
     {'condition': [('A', 5)], 'discount': 50},
     {'condition': [('P', 5)], 'discount': 50},
     {'condition': [('U', 4)], 'discount': 40},
@@ -23,12 +22,29 @@ OFFERS = [
     {'condition': [('H', 10)], 'discount': 20},
     {'condition': [('K', 2)], 'discount': 20},
     {'condition': [('V', 3)], 'discount': 20},
+    {'condition': [('Z', 3)], 'discount': 18},
+    {'condition': [('Z', 1), ('S', 1), ('T', 1)], 'discount': 16},
+    {'condition': [('Z', 1), ('S', 1), ('Y', 1)], 'discount': 16},
+    {'condition': [('Z', 1), ('T', 1), ('Y', 1)], 'discount': 16},
+    {'condition': [('Z', 1), ('S', 2)], 'discount': 16},
+    {'condition': [('Z', 1), ('T', 2)], 'discount': 16},
+    {'condition': [('Z', 1), ('Y', 2)], 'discount': 16},
     {'condition': [('B', 2)], 'discount': 15},
     {'condition': [('N', 3), ('M', 1)], 'discount': 15},
+    {'condition': [('S', 1), ('T', 1), ('Y', 1)], 'discount': 15},
+    {'condition': [('S', 3)], 'discount': 15},
+    {'condition': [('T', 3)], 'discount': 15},
+    {'condition': [('Y', 3)], 'discount': 15},
+    {'condition': [('X', 1), ('Z', 1), ('S', 1)], 'discount': 13},
+    {'condition': [('X', 1), ('Z', 1), ('T', 1)], 'discount': 13},
+    {'condition': [('X', 1), ('Z', 1), ('Y', 1)], 'discount': 13},
+    {'condition': [('X', 1), ('S', 1), ('T', 1)], 'discount': 12},
+    {'condition': [('X', 1), ('S', 1), ('Y', 1)], 'discount': 12},
+    {'condition': [('X', 1), ('T', 1), ('Y', 1)], 'discount': 12},
     {'condition': [('F', 3)], 'discount': 10},
     {'condition': [('Q', 3)], 'discount': 10},
     {'condition': [('V', 2)], 'discount': 10},
-    {'condition': [('X', 3)], 'discount': 10},
+    {'condition': [('X', 3)], 'discount': 6},
     {'condition': [('H', 5)], 'discount': 5},
 ]
 
@@ -84,5 +100,6 @@ def checkout(skus: str) -> int:
 
     total_discount = get_discount(items)
     return amount - total_discount
+
 
 
