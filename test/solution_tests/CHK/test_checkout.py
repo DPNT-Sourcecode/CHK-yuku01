@@ -46,4 +46,3 @@ def test_checkout_success(products, output):
 )
 def test_checkout_error(products):
     assert checkout(products) == -1
-
