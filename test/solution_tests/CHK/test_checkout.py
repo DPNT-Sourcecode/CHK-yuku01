@@ -8,7 +8,7 @@ from lib.solutions.CHK.checkout_solution import checkout
     (
         ('', 0),
         ('B', 30),
-        ('ABCDE', 155),
+        ('ABCDEF', 165),
         ('AAA', 130),
         ('AAAAAA', 250),
         ('AAAA', 180),
@@ -17,6 +17,11 @@ from lib.solutions.CHK.checkout_solution import checkout
         ('BBBEE', 125),
         ('BBBEEEE', 190),
         ('AAAAAAAA', 330),
+        ('FFF', 20),
+        ('FFFFF', 40),
+        ('FFFFFF', 40),
+        ('BBBEEFF', 145),
+        ('BBBEEFFF', 145),
     ),
 )
 def test_checkout_success(products, output):
@@ -29,3 +34,4 @@ def test_checkout_success(products, output):
 )
 def test_checkout_error(products):
     assert checkout(products) == -1
+

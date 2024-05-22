@@ -7,13 +7,14 @@ from collections import Counter
 DISCOUNT_TYPE = dict[str, dict[str, int]]
 
 # DB tables mock
-PRICES = {'A': 50, 'B': 30, 'C': 20, 'D': 15, 'E': 40}
+PRICES = {'A': 50, 'B': 30, 'C': 20, 'D': 15, 'E': 40, 'F': 10}
 # SQL can be like "SELECT ... FROM offers WHERE product_in in ... ORDER BY discount DESC"
 OFFERS = [
     {'condition': [('A', 5)], 'discount': 50},
     {'condition': [('A', 3)], 'discount': 20},
     {'condition': [('B', 1), ('E', 2)], 'discount': 30},
     {'condition': [('B', 2)], 'discount': 15},
+    {'condition': [('F', 3)], 'discount': 10},
 ]
 
 
@@ -68,3 +69,4 @@ def checkout(skus: str) -> int:
 
     total_discount = get_discount(items)
     return amount - total_discount
+
