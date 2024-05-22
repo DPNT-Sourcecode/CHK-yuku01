@@ -25,12 +25,16 @@ OFFERS = [
     {'condition': [('H', 10)], 'discount': 20},
     {'condition': [('K', 2)], 'discount': 20},
     {'condition': [('V', 3)], 'discount': 20},
+    {'condition': [('Z', 3)], 'discount': 18},
     {'condition': [('Z', 1), ('S', 1), ('T', 1)], 'discount': 16},
     {'condition': [('Z', 1), ('S', 1), ('Y', 1)], 'discount': 16},
     {'condition': [('Z', 1), ('T', 1), ('Y', 1)], 'discount': 16},
     {'condition': [('B', 2)], 'discount': 15},
     {'condition': [('N', 3), ('M', 1)], 'discount': 15},
     {'condition': [('S', 1), ('T', 1), ('Y', 1)], 'discount': 15},
+    {'condition': [('S', 3)], 'discount': 15},
+    {'condition': [('T', 3)], 'discount': 15},
+    {'condition': [('Y', 3)], 'discount': 15},
     {'condition': [('X', 1), ('Z', 1), ('S', 1)], 'discount': 13},
     {'condition': [('X', 1), ('Z', 1), ('T', 1)], 'discount': 13},
     {'condition': [('X', 1), ('Z', 1), ('Y', 1)], 'discount': 13},
@@ -40,6 +44,7 @@ OFFERS = [
     {'condition': [('F', 3)], 'discount': 10},
     {'condition': [('Q', 3)], 'discount': 10},
     {'condition': [('V', 2)], 'discount': 10},
+    {'condition': [('X', 3)], 'discount': 10},
     {'condition': [('H', 5)], 'discount': 5},
 ]
 
@@ -95,3 +100,4 @@ def checkout(skus: str) -> int:
 
     total_discount = get_discount(items)
     return amount - total_discount
+

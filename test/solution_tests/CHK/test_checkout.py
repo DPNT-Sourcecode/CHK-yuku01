@@ -30,6 +30,10 @@ from lib.solutions.CHK.checkout_solution import checkout
         ('TXY', 45),
         ('XYZ', 45),
         ('SYZ', 45),
+        ('SSS', 45),
+        ('SSSZ', 65),
+        ('ZZZ', 45),
+        ('ZZZST', 85),
     ),
 )
 def test_checkout_success(products, output):
@@ -42,3 +46,4 @@ def test_checkout_success(products, output):
 )
 def test_checkout_error(products):
     assert checkout(products) == -1
+
