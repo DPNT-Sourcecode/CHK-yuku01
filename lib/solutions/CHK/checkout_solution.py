@@ -7,14 +7,31 @@ from collections import Counter
 DISCOUNT_TYPE = dict[str, dict[str, int]]
 
 # DB tables mock
-PRICES = {'A': 50, 'B': 30, 'C': 20, 'D': 15, 'E': 40, 'F': 10}
+PRICES = {
+    'A': 50, 'B': 30, 'C': 20, 'D': 15, 'E': 40, 'F': 10,
+    'G': 20, 'H': 10, 'I': 35, 'J': 60, 'K': 80, 'L': 90,
+    'M': 15, 'N': 40, 'O': 10, 'P': 50, 'Q': 30, 'R': 50,
+    'S': 30, 'T': 20, 'U': 40, 'V': 50, 'W': 20, 'X': 90,
+    'Y': 10, 'Z': 50
+}
 # SQL can be like "SELECT ... FROM offers WHERE product_in in ... ORDER BY discount DESC"
 OFFERS = [
+
     {'condition': [('A', 5)], 'discount': 50},
-    {'condition': [('A', 3)], 'discount': 20},
+    {'condition': [('P', 5)], 'discount': 50},
+    {'condition': [('U', 4)], 'discount': 40},
     {'condition': [('B', 1), ('E', 2)], 'discount': 30},
+    {'condition': [('R', 3), ('Q', 2)], 'discount': 30},
+    {'condition': [('A', 3)], 'discount': 20},
+    {'condition': [('V', 3)], 'discount': 20},
+    {'condition': [('H', 10)], 'discount': 20},
     {'condition': [('B', 2)], 'discount': 15},
+    {'condition': [('N', 3), ('M', 1)], 'discount': 15},
     {'condition': [('F', 3)], 'discount': 10},
+    {'condition': [('K', 2)], 'discount': 10},
+    {'condition': [('Q', 3)], 'discount': 10},
+    {'condition': [('V', 2)], 'discount': 10},
+    {'condition': [('H', 5)], 'discount': 5},
 ]
 
 
@@ -69,4 +86,3 @@ def checkout(skus: str) -> int:
 
     total_discount = get_discount(items)
     return amount - total_discount
-

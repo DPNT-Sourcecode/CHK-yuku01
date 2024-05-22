@@ -30,8 +30,7 @@ def test_checkout_success(products, output):
 
 @pytest.mark.parametrize(
     'products',
-    ('Z', 'ab', 'AB4', 'A B C D', 4),
+    ('ab', 'AB4', 'A B C D', 4),
 )
 def test_checkout_error(products):
     assert checkout(products) == -1
-
