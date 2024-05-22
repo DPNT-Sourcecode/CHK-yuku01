@@ -23,6 +23,9 @@ OFFERS = [
     {'condition': [('K', 2)], 'discount': 20},
     {'condition': [('V', 3)], 'discount': 20},
     {'condition': [('Z', 3)], 'discount': 18},
+    {'condition': [('Z', 2), ('S', 1)], 'discount': 17},
+    {'condition': [('Z', 2), ('T', 1)], 'discount': 17},
+    {'condition': [('Z', 2), ('Y', 1)], 'discount': 17},
     {'condition': [('Z', 1), ('S', 1), ('T', 1)], 'discount': 16},
     {'condition': [('Z', 1), ('S', 1), ('Y', 1)], 'discount': 16},
     {'condition': [('Z', 1), ('T', 1), ('Y', 1)], 'discount': 16},
@@ -35,12 +38,23 @@ OFFERS = [
     {'condition': [('S', 3)], 'discount': 15},
     {'condition': [('T', 3)], 'discount': 15},
     {'condition': [('Y', 3)], 'discount': 15},
+    {'condition': [('S', 2), ('Y', 1)], 'discount': 15},
+    {'condition': [('S', 2), ('T', 1)], 'discount': 15},
+    {'condition': [('Y', 2), ('S', 1)], 'discount': 15},
+    {'condition': [('Y', 2), ('T', 1)], 'discount': 15},
+    {'condition': [('T', 2), ('Y', 1)], 'discount': 15},
+    {'condition': [('T', 2), ('S', 1)], 'discount': 15},
+    {'condition': [('X', 1), ('Z', 2)], 'discount': 14},
     {'condition': [('X', 1), ('Z', 1), ('S', 1)], 'discount': 13},
     {'condition': [('X', 1), ('Z', 1), ('T', 1)], 'discount': 13},
     {'condition': [('X', 1), ('Z', 1), ('Y', 1)], 'discount': 13},
     {'condition': [('X', 1), ('S', 1), ('T', 1)], 'discount': 12},
     {'condition': [('X', 1), ('S', 1), ('Y', 1)], 'discount': 12},
     {'condition': [('X', 1), ('T', 1), ('Y', 1)], 'discount': 12},
+    {'condition': [('X', 1), ('S', 2)], 'discount': 12},
+    {'condition': [('X', 1), ('T', 2)], 'discount': 12},
+    {'condition': [('X', 1), ('Y', 2)], 'discount': 12},
+    {'condition': [('X', 2), ('Z', 1)], 'discount': 12},
     {'condition': [('F', 3)], 'discount': 10},
     {'condition': [('Q', 3)], 'discount': 10},
     {'condition': [('V', 2)], 'discount': 10},
@@ -100,6 +114,9 @@ def checkout(skus: str) -> int:
 
     total_discount = get_discount(items)
     return amount - total_discount
+
+
+logging.warning(checkout('STXS'))
 
 
 
