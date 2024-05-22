@@ -22,6 +22,10 @@ from lib.solutions.CHK.checkout_solution import checkout
         ('FFFFFF', 40),
         ('BBBEEFF', 145),
         ('BBBEEFFF', 145),
+        ('H'*15, 125),
+        ('KKMNNN', 270),
+        ('PPPPPQQQQRRR', 200+80+150),
+        ('UUUUVVVVV', 340),
     ),
 )
 def test_checkout_success(products, output):
@@ -34,3 +38,4 @@ def test_checkout_success(products, output):
 )
 def test_checkout_error(products):
     assert checkout(products) == -1
+
