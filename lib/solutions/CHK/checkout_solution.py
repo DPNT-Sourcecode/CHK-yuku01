@@ -3,20 +3,43 @@
 import logging
 from collections import Counter
 
-def generate_any_x_discounts(
-    items: list[str], limit: int, price: int
-) -> dict[str, list[tuple[str | int]] | int]:
+
+def generate_any_3_discounts(
+    items: str, price: int
+) -> list[dict[str, list[tuple[str | int]] | int]]:
     """
 
     """
-    first = 0
+    limit = 3
     discounts = []
-    while (first + limit) <= len(items):
-
-        new+discounts += [
-            {'condition': [('A', 5)], 'discount': 50}
+    for i in range(len(items) - limit):
+        discounts += [
+            {
+                'condition': [(items[i], 3)],
+                'discount': PRICES[items[i]] * 3 - price,
+            },
+            {
+                'condition': [(items[i], 2), (items[i + 1], 1)],
+                'discount': PRICES[items[i]] * 2 + PRICES[items[i + 1]] * 1 - price,
+            },
+            {
+                'condition': [(items[i], 2), (items[i + 2], 1)],
+                'discount': PRICES[items[i]] * 2 + PRICES[items[i + 2]] * 1 - price,
+            },
+            {
+                'condition': [(items[i], 1), (items[i + 1], 2)],
+                'discount': PRICES[items[i]] * 1 + PRICES[items[i + 1]] * 2 - price,
+            },
+            {
+                'condition': [(items[i], 1), (items[i + 2], 2)],
+                'discount': PRICES[items[i]] * 1 + PRICES[items[i + 2]] * 2 - price,
+            },
+            {
+                'condition': [(items[i], 1), (items[i + 1], 1), (items[i + 2], 1)],
+                'discount': PRICES[items[i]] + PRICES[items[i + 1]] + PRICES[items[i + 2]] - price
+            },
         ]
-        first += 1
+    return discounts
 
 
 # DB tables mock (it was better to collect it from task file)
@@ -38,30 +61,16 @@ OFFERS = [
     {'condition': [('H', 10)], 'discount': 20},
     {'condition': [('K', 2)], 'discount': 20},
     {'condition': [('V', 3)], 'discount': 20},
-    {'condition': [('Z', 3)], 'discount': 18},
-    {'condition': [('Z', 1), ('S', 1), ('T', 1)], 'discount': 16},
-    {'condition': [('Z', 1), ('S', 1), ('Y', 1)], 'discount': 16},
-    {'condition': [('Z', 1), ('T', 1), ('Y', 1)], 'discount': 16},
     {'condition': [('B', 2)], 'discount': 15},
     {'condition': [('N', 3), ('M', 1)], 'discount': 15},
-    {'condition': [('S', 1), ('T', 1), ('Y', 1)], 'discount': 15},
-    {'condition': [('S', 3)], 'discount': 15},
-    {'condition': [('T', 3)], 'discount': 15},
-    {'condition': [('Y', 3)], 'discount': 15},
-    {'condition': [('X', 1), ('Z', 1), ('S', 1)], 'discount': 13},
-    {'condition': [('X', 1), ('Z', 1), ('T', 1)], 'discount': 13},
-    {'condition': [('X', 1), ('Z', 1), ('Y', 1)], 'discount': 13},
-    {'condition': [('X', 1), ('S', 1), ('T', 1)], 'discount': 12},
-    {'condition': [('X', 1), ('S', 1), ('Y', 1)], 'discount': 12},
-    {'condition': [('X', 1), ('T', 1), ('Y', 1)], 'discount': 12},
     {'condition': [('F', 3)], 'discount': 10},
     {'condition': [('Q', 3)], 'discount': 10},
     {'condition': [('V', 2)], 'discount': 10},
     {'condition': [('X', 3)], 'discount': 10},
     {'condition': [('H', 5)], 'discount': 5},
-]
-
-
+] + generate_any_3_discounts('STXYZ', 45)
+OFFERS.sort(key=lambda o: o['discount'], reverse=True)
+logging.warning(OFFERS)
 
 
 def get_discount(items: Counter) -> int:
@@ -115,3 +124,4 @@ def checkout(skus: str) -> int:
 
     total_discount = get_discount(items)
     return amount - total_discount
+
