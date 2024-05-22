@@ -21,7 +21,7 @@ OFFERS = [
     {'condition': [('P', 5)], 'discount': 50},
     {'condition': [('U', 4)], 'discount': 40},
     {'condition': [('B', 1), ('E', 2)], 'discount': 30},
-    {'condition': [('R', 3), ('Q', 2)], 'discount': 30},
+    {'condition': [('R', 3), ('Q', 1)], 'discount': 30},
     {'condition': [('A', 3)], 'discount': 20},
     {'condition': [('V', 3)], 'discount': 20},
     {'condition': [('H', 10)], 'discount': 20},
@@ -86,3 +86,4 @@ def checkout(skus: str) -> int:
 
     total_discount = get_discount(items)
     return amount - total_discount
+
