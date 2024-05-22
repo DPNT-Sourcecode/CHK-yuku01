@@ -11,7 +11,7 @@ from lib.solutions.CHK.checkout_solution import checkout
         ('AAA', 130),
         ('AAAAAA', 260),
         ('AAAA', 180),
-        ('AAABB', 180),
+        ('AAABB', 175),
     ),
 )
 def test_checkout_success(products, output):
