@@ -78,4 +78,3 @@ def checkout(skus: str) -> int:
         amount += PRICES[item] * products_n
 
     return amount - total_discount
-
