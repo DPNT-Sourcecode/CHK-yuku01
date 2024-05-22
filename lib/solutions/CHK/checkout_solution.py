@@ -3,8 +3,21 @@
 import logging
 from collections import Counter
 
+def generate_any_x_discounts(
+    items: list[str], limit: int, price: int
+) -> dict[str, list[tuple[str | int]] | int]:
+    """
 
-DISCOUNT_TYPE = dict[str, dict[str, int]]
+    """
+    first = 0
+    discounts = []
+    while (first + limit) <= len(items):
+
+        new+discounts += [
+            {'condition': [('A', 5)], 'discount': 50}
+        ]
+        first += 1
+
 
 # DB tables mock (it was better to collect it from task file)
 PRICES = {
@@ -47,6 +60,8 @@ OFFERS = [
     {'condition': [('X', 3)], 'discount': 10},
     {'condition': [('H', 5)], 'discount': 5},
 ]
+
+
 
 
 def get_discount(items: Counter) -> int:
@@ -100,4 +115,5 @@ def checkout(skus: str) -> int:
 
     total_discount = get_discount(items)
     return amount - total_discount
+
 
