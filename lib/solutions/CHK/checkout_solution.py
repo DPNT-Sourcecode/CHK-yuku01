@@ -3,10 +3,15 @@
 import logging
 
 # DB tables mock
-PRICES = {'A': 50, 'B': 30, 'C': 20, 'D': 15}
+PRICES = {'A': 50, 'B': 30, 'C': 20, 'D': 15, 'E': 40}
+# 
 OFFERS = {
-    'A': {'count': 3, 'price': 130},
-    'B': {'count': 2, 'price': 45},
+    'A': [
+        {'count': 5, 'item': 'A', 'discount': -20},
+        {'count': 3, 'item': 'A', 'discount': -50},
+    ],
+    'B': [{'count': 2, 'price': 45}],
+    'E': [],
 }
 
 
@@ -41,6 +46,3 @@ def checkout(skus: str) -> int:
         amount += PRICES[item] * products_n + discount_price
 
     return amount
-
-
-
