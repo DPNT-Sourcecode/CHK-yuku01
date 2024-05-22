@@ -4,44 +4,6 @@ import logging
 from collections import Counter
 
 
-def generate_any_3_discounts(
-    items: str, price: int
-) -> list[dict[str, list[tuple[str | int]] | int]]:
-    """
-
-    """
-    limit = 3
-    discounts = []
-    for i in range(len(items) - limit):
-        discounts += [
-            {
-                'condition': [(items[i], 3)],
-                'discount': PRICES[items[i]] * 3 - price,
-            },
-            {
-                'condition': [(items[i], 2), (items[i + 1], 1)],
-                'discount': PRICES[items[i]] * 2 + PRICES[items[i + 1]] * 1 - price,
-            },
-            {
-                'condition': [(items[i], 2), (items[i + 2], 1)],
-                'discount': PRICES[items[i]] * 2 + PRICES[items[i + 2]] * 1 - price,
-            },
-            {
-                'condition': [(items[i], 1), (items[i + 1], 2)],
-                'discount': PRICES[items[i]] * 1 + PRICES[items[i + 1]] * 2 - price,
-            },
-            {
-                'condition': [(items[i], 1), (items[i + 2], 2)],
-                'discount': PRICES[items[i]] * 1 + PRICES[items[i + 2]] * 2 - price,
-            },
-            {
-                'condition': [(items[i], 1), (items[i + 1], 1), (items[i + 2], 1)],
-                'discount': PRICES[items[i]] + PRICES[items[i + 1]] + PRICES[items[i + 2]] - price
-            },
-        ]
-    return discounts
-
-
 # DB tables mock (it was better to collect it from task file)
 PRICES = {
     'A': 50, 'B': 30, 'C': 20, 'D': 15, 'E': 40, 'F': 10, 'G': 20, 'H': 10,
@@ -68,9 +30,7 @@ OFFERS = [
     {'condition': [('V', 2)], 'discount': 10},
     {'condition': [('X', 3)], 'discount': 10},
     {'condition': [('H', 5)], 'discount': 5},
-] + generate_any_3_discounts('STXYZ', 45)
-OFFERS.sort(key=lambda o: o['discount'], reverse=True)
-logging.warning(OFFERS)
+]
 
 
 def get_discount(items: Counter) -> int:
@@ -124,4 +84,5 @@ def checkout(skus: str) -> int:
 
     total_discount = get_discount(items)
     return amount - total_discount
+
 
