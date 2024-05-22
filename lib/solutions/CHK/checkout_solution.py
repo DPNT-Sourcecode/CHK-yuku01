@@ -27,19 +27,19 @@ def get_discount(items: Counter) -> int:
             item: items[item] // n
             for item, n in offer['condition']
         }
+        logging.warning(applies)
         min_applies = min(applies.values())
         logging.warning(applies)
         if min_applies > 0:
             discount += offer['discount'] * min_applies
             left = {
-                item: items[item] // n * -1
+                item: items[item] // n * n * -1
                 for item, n in offer['condition']
             }
 
-            logging.warning(discount)
             items.update(left)
-        logging.warning(items)
 
+    logging.warning(discount)
     return discount
 
 
@@ -67,11 +67,10 @@ def checkout(skus: str) -> int:
         amount += PRICES[item] * items[item]
 
     total_discount = get_discount(items)
-
     return amount - total_discount
 
 
-checkout('BBEE')
+checkout('AAAAAA')
 
 
 
