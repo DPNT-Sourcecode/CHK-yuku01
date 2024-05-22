@@ -1,53 +1,42 @@
 # noinspection PyUnusedLocal
 # skus = unicode string
 import logging
+from collections import Counter
 
 
 DISCOUNT_TYPE = dict[str, dict[str, int]]
 
 # DB tables mock
 PRICES = {'A': 50, 'B': 30, 'C': 20, 'D': 15, 'E': 40}
-# SQL can be like "SELECT ... FROM offers WHERE ... ORDER BY discount DESC"
-OFFERS = {
-    'A': [
-        {'count': 5, 'item': 'A', 'discount': 50},
-        {'count': 3, 'item': 'A', 'discount': 30},
-    ],
-    'B': [
-        {'count': 2, 'item': 'E', 'price': 30},
-        {'count': 2, 'item': 'B', 'price': 15},
-    ],
-}
+# SQL can be like "SELECT ... FROM offers WHERE product_in in ... ORDER BY discount DESC"
+OFFERS = [
+    {'condition': [('A', 5)], 'discount': 50},
+    {'condition': [('A', 3)], 'discount': 30},
+    {'condition': [('B', 1), ('E', 2)], 'discount': 30},
+    {'condition': [('B', 2)], 'discount': 15},
+]
 
 
-def get_discount(item: str, n: int) -> DISCOUNT_TYPE:
+def get_discount(items: dict[str, int]) -> int:
     """
 
     """
-    discount_prices = {}
-    for offer in OFFERS[item]:
-        applies = n // offer['count']
-        if offer['item'] not in discount_prices:
-            discount_prices[offer['item']] = {'discount': 0, 'count': 0}
+    discount = 0
+    for offer in OFFERS:
+        applies = {
+            item: items[item] // n
+            for item, n in offer['condition']
+        }
+        min_applies = min(applies.values())
+        if min_applies > 0:
+            discount += offer['discount'] * min_applies
+            left = {
+                item: items[item] % n
+                for item, n in offer['condition']
+            }
+            items.update(left)
 
-        discount_prices[offer['item']]['discount'] += applies * offer['price']
-        discount_prices[offer['item']]['count'] += applies * offer['count']
-        n = n % offer['count']
-
-    return discount_prices
-
-
-def apply_discount(applied: DISCOUNT_TYPE, new: DISCOUNT_TYPE) -> DISCOUNT_TYPE:
-    """
-
-    """
-    for item, new_discount in new.items():
-        if item in applied:
-            ...
-        else:
-            applied[item] = new_discount
-
-    return applied
+    return discount
 
 
 def checkout(skus: str) -> int:
@@ -65,16 +54,15 @@ def checkout(skus: str) -> int:
         return -1
 
     amount = 0
-    total_discount = {}
+    items = Counter(skus)
     for item in set(skus):
         if item not in PRICES:
             logging.warning(f'Product {item} not in DB')
             return -1
 
-        products_n = skus.count(item)
-        item_discounts = get_discount(item, products_n)
+        amount += PRICES[item] * items[item]
 
-
-        amount += PRICES[item] * products_n
+    total_discount = get_discount(items)
 
     return amount - total_discount
+
