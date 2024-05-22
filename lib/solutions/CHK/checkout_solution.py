@@ -6,7 +6,7 @@ from collections import Counter
 
 DISCOUNT_TYPE = dict[str, dict[str, int]]
 
-# DB tables mock
+# DB tables mock (was better to collect it from task file)
 PRICES = {
     'A': 50, 'B': 30, 'C': 20, 'D': 15, 'E': 40, 'F': 10, 'G': 20, 'H': 10,
     'I': 35, 'J': 60, 'K': 70, 'L': 90, 'M': 15, 'N': 40, 'O': 10, 'P': 50,
@@ -25,6 +25,9 @@ OFFERS = [
     {'condition': [('H', 10)], 'discount': 20},
     {'condition': [('K', 2)], 'discount': 20},
     {'condition': [('V', 3)], 'discount': 20},
+    {'condition': [('Z', 1), ('S', 1), ('T', 1)], 'discount': 16},
+    {'condition': [('Z', 1), ('S', 1), ('Y', 1)], 'discount': 16},
+    {'condition': [('Z', 1), ('T', 1), ('Y', 1)], 'discount': 16},
     {'condition': [('B', 2)], 'discount': 15},
     {'condition': [('N', 3), ('M', 1)], 'discount': 15},
     {'condition': [('F', 3)], 'discount': 10},
@@ -85,5 +88,6 @@ def checkout(skus: str) -> int:
 
     total_discount = get_discount(items)
     return amount - total_discount
+
 
 
