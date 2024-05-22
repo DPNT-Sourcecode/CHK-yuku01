@@ -28,6 +28,7 @@ def get_discount(items: dict[str, int]) -> int:
             for item, n in offer['condition']
         }
         min_applies = min(applies.values())
+        logging.warning(applies)
         if min_applies > 0:
             discount += offer['discount'] * min_applies
             left = {
@@ -65,5 +66,8 @@ def checkout(skus: str) -> int:
     total_discount = get_discount(items)
 
     return amount - total_discount
+
+
+checkout('BBEE')
 
 
