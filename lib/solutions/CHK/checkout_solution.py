@@ -4,15 +4,28 @@ import logging
 
 # DB tables mock
 PRICES = {'A': 50, 'B': 30, 'C': 20, 'D': 15, 'E': 40}
-# 
+# SQL can be like "SELECT ... FROM offers WHERE ... ORDER BY count DESC"
 OFFERS = {
     'A': [
-        {'count': 5, 'item': 'A', 'discount': -20},
-        {'count': 3, 'item': 'A', 'discount': -50},
+        {'count': 5, 'item': 'A', 'discount': 20},
+        {'count': 3, 'item': 'A', 'discount': 50},
     ],
-    'B': [{'count': 2, 'price': 45}],
-    'E': [],
+    'B': [{'count': 2, 'item': 'B', 'price': 15}],
+    'E': [{'count': 2, 'item': 'B', 'price': 30}],
 }
+
+
+def get_discount(item: str, n: int) -> dict:
+    """
+
+    """
+    discount_price = {} # {'A': {'discount': 15, 'count': 5}}
+    for offer in OFFERS[item]:
+        if offer['item'] not in discount_price:
+            discount_price[offer['item']] = {'discount': 0, 'count': 0}
+        discount_price
+
+    return
 
 
 def checkout(skus: str) -> int:
@@ -30,19 +43,15 @@ def checkout(skus: str) -> int:
         return -1
 
     amount = 0
+    total_discount = 0
     for item in set(skus):
         if item not in PRICES:
             logging.warning(f'Product {item} not in DB')
             return -1
 
         products_n = skus.count(item)
-        discount_price = 0
-        if item in OFFERS:
-            discount_price = (
-                (products_n // OFFERS[item]['count']) * OFFERS[item]['price']
-            )
-            products_n = products_n % OFFERS[item]['count']
 
-        amount += PRICES[item] * products_n + discount_price
+        amount += PRICES[item] * products_n
 
-    return amount
+    return amount - total_discount
+
