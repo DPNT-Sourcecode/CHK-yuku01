@@ -18,7 +18,12 @@ def checkout(skus: str) -> int:
     :return: total checkout value of the items
       or -1 if "skus" parameter is wrong
     """
-    if not isinstance(skus, str) or not skus.isalpha() or not skus.isupper():
+    if (
+        not isinstance(skus, str)
+        or not skus
+        or not skus.isalpha()
+        or not skus.isupper()
+    ):
         return -1
 
     amount = 0
@@ -38,4 +43,5 @@ def checkout(skus: str) -> int:
         amount += PRICES[item] * products_n + discount_price
 
     return amount
+
 
