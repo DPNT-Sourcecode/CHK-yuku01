@@ -95,7 +95,3 @@ def checkout(skus: str) -> int:
 
     total_discount = get_discount(items)
     return amount - total_discount
-
-
-
-
