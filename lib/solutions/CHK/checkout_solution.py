@@ -17,7 +17,7 @@ OFFERS = [
 ]
 
 
-def get_discount(items: dict[str, int]) -> int:
+def get_discount(items: Counter) -> int:
     """
 
     """
@@ -35,7 +35,10 @@ def get_discount(items: dict[str, int]) -> int:
                 item: items[item] % n
                 for item, n in offer['condition']
             }
+
+            logging.warning(left)
             items.update(left)
+        logging.warning(items)
 
     return discount
 
@@ -69,5 +72,6 @@ def checkout(skus: str) -> int:
 
 
 checkout('BBEE')
+
 
 
