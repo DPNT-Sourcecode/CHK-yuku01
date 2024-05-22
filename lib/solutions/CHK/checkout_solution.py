@@ -20,9 +20,7 @@ def checkout(skus: str) -> int:
     """
     if (
         not isinstance(skus, str)
-        or not skus
-        or not skus.isalpha()
-        or not skus.isupper()
+        or skus and (not skus.isalpha() or not skus.isupper())
     ):
         return -1
 
@@ -43,5 +41,6 @@ def checkout(skus: str) -> int:
         amount += PRICES[item] * products_n + discount_price
 
     return amount
+
 
 

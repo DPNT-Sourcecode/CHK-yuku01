@@ -12,6 +12,7 @@ from lib.solutions.CHK.checkout_solution import checkout
         ('AAAAAA', 260),
         ('AAAA', 180),
         ('AAABB', 175),
+        ('', 0),
     ),
 )
 def test_checkout_success(products, output):
@@ -20,8 +21,9 @@ def test_checkout_success(products, output):
 
 @pytest.mark.parametrize(
     'products',
-    ('E', 'ab', 'AB4', 'A B C D', 4, ''),
+    ('E', 'ab', 'AB4', 'A B C D', 4),
 )
 def test_checkout_error(products):
     assert checkout(products) == -1
+
 
