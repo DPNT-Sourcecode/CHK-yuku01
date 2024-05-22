@@ -19,7 +19,10 @@ OFFERS = [
 
 def get_discount(items: Counter) -> int:
     """
+    Calculates max discount for checkout
 
+    :param items: number of each item
+    :return: maximum discount
     """
     discount = 0
     for offer in OFFERS:
@@ -65,8 +68,3 @@ def checkout(skus: str) -> int:
 
     total_discount = get_discount(items)
     return amount - total_discount
-
-
-
-
-
